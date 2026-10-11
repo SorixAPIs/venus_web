@@ -8,18 +8,18 @@
     <meta name="description" content="Venus - The best Roblox executor and external. Simple UI, 99 UNC, 100+ features.">
     <meta name="theme-color" content="#4e9af5">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://getvenus.kdns.fr/">
+    <meta property="og:url" content="https://venus.dev.tc/home">
     <meta property="og:title" content="Venus">
     <meta property="og:description" content="The best Roblox executor and external.">
-    <meta property="og:image" content="https://getvenus.kdns.fr/Preview.png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
+    <meta property="og:image" content="https://venus.dev.tc/Logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
     <meta property="og:site_name" content="Venus">
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://getvenus.kdns.fr/">
+    <meta property="twitter:url" content="https://venus.dev.tc/home">
     <meta property="twitter:title" content="Venus">
     <meta property="twitter:description" content="The best Roblox executor and external.">
-    <meta property="twitter:image" content="https://getvenus.kdns.fr/Preview.png">
+    <meta property="twitter:image" content="https://venus.dev.tc/Logo.png">
     <style>
         :root {
             --bg: #0c0e13;
@@ -102,6 +102,11 @@
             padding: 20px 0;
             border-bottom: 1px solid var(--border);
             animation: slideInLeft 0.6s var(--ease-out);
+            /* The entrance animation leaves a transform behind, which makes
+               nav a stacking context. Lift it so its dropdown panels are not
+               painted over by later sections. */
+            position: relative;
+            z-index: 30;
         }
 
         nav .wrap {
@@ -164,6 +169,10 @@
         .hero {
             padding: 100px 0 60px;
             text-align: center;
+            /* Same stacking fix as nav: the download dropdown lives in here
+               and must render above the stats grid that follows it. */
+            position: relative;
+            z-index: 30;
         }
 
         .hero h1 {
@@ -336,6 +345,10 @@
             overflow: hidden;
             margin-bottom: 60px;
             animation: fadeInScale 0.8s var(--ease-out) 0.6s both;
+            /* Pinned below the hero (z-index 30) so the download dropdown,
+               which overflows out of the hero, is never painted over. */
+            position: relative;
+            z-index: 1;
         }
 
         .stat {
@@ -687,7 +700,7 @@
             Venus
         </a>
         <div class="nav-links">
-            <a href="https://getvenus.kdns.fr/tos" class="nav-link">Terms</a>
+            <a href="../tos" class="nav-link">Terms</a>
             <a href="https://discord.gg/xmVuuRhWQP" target="_blank" rel="noopener" class="nav-link" id="discord-link">Discord</a>
             <div class="info-wrap">
                 <a href="#" class="nav-link" id="infoBtn">Status</a>
@@ -793,7 +806,7 @@
     <div class="wrap">Venus 2026 V1 &middot; All rights reserved</div>
 </footer>
 
-<script src="../API/fetch.js"></script>
+<script src="../lib/fetch.js"></script>
 <script>
     function fmt(n) {
         if (n >= 1e6) return (n / 1e6).toFixed(1).replace(/\.0$/, '') + 'M';
@@ -911,16 +924,21 @@
     // Build the Download dropdown: one entry per product
     (function buildDownloadMenu() {
         const menu = $('download-menu');
-        const invite = VenusAPI.DEFAULT_INVITE;
         [['Executor', 'M16 18l6-6-6-6M8 6l-6 6 6 6'],
-         ['External', 'M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zM2 12h20M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20z']]
+         ['External', 'M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3']]
             .forEach(([title, path]) => {
                 const a = document.createElement('a');
-                a.href = invite;
-                a.target = '_blank';
-                a.rel = 'noopener';
+                a.href = VenusAPI.downloadUrl(title);
                 a.className = 'dropdown-item';
-                a.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="' + path + '"></path></svg><span>' + title + '</span>';
+                a.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="' + path + '"></path></svg><span>' + title + '</span>';
+                // Direct file links download in place; the Discord
+                // fallback opens in a new tab.
+                if (!/discord\.gg/.test(a.href)) {
+                    a.setAttribute('download', '');
+                } else {
+                    a.target = '_blank';
+                    a.rel = 'noopener';
+                }
                 menu.appendChild(a);
             });
     })();

@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Venus</title>
     <link rel="icon" type="image/png" href="../Logo.png">
-    <meta name="description" content="A powerful external for Roblox with fly, aimbot, and more.">
+    <meta name="description" content="Venus - The best Roblox executor and external. Simple UI, 99 UNC, 100+ features.">
     <meta name="theme-color" content="#4e9af5">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://getvenus.kdns.fr/">
     <meta property="og:title" content="Venus">
-    <meta property="og:description" content="A powerful external for Roblox with fly, aimbot, and more.">
+    <meta property="og:description" content="The best Roblox executor and external.">
     <meta property="og:image" content="https://getvenus.kdns.fr/Preview.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -18,7 +18,7 @@
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://getvenus.kdns.fr/">
     <meta property="twitter:title" content="Venus">
-    <meta property="twitter:description" content="A powerful external for Roblox with fly, aimbot, and more.">
+    <meta property="twitter:description" content="The best Roblox executor and external.">
     <meta property="twitter:image" content="https://getvenus.kdns.fr/Preview.png">
     <style>
         :root {
@@ -129,6 +129,9 @@
         .brand img {
             width: 28px;
             height: 28px;
+            border-radius: 50%;
+            object-fit: cover;
+            background: var(--surface);
             animation: float 6s ease-in-out infinite;
             transition: transform 0.3s var(--ease-out);
         }
@@ -441,6 +444,182 @@
             border-bottom: 1px solid var(--border);
         }
 
+        .tab-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4px;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 3px;
+            margin-bottom: 14px;
+        }
+
+        .tab-btn {
+            padding: 6px 8px;
+            font-size: 12px;
+            font-weight: 600;
+            font-family: inherit;
+            color: var(--muted);
+            background: transparent;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.25s var(--ease-out);
+        }
+
+        .tab-btn:hover { color: var(--text); }
+
+        .tab-btn.active {
+            background: var(--accent);
+            color: #fff;
+        }
+
+        .status-row span:last-child {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .status-row .mini-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--muted);
+            flex-shrink: 0;
+        }
+
+        .sections-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #fff;
+            text-align: center;
+            margin-bottom: 20px;
+            letter-spacing: -0.5px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-bottom: 60px;
+        }
+
+        .product-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 28px;
+            transition: all 0.4s var(--ease-out);
+            animation: fadeInUp 0.8s var(--ease-out) both;
+        }
+
+        .product-card:nth-child(2) { animation-delay: 0.15s; }
+
+        .product-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-6px);
+            box-shadow: 0 16px 40px rgba(78, 154, 245, 0.15);
+        }
+
+        .product-card .pc-head {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 6px;
+        }
+
+        .pc-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 9px;
+            background: var(--accent-dim);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            flex-shrink: 0;
+        }
+
+        .product-card h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .product-card .pc-sub {
+            font-size: 12px;
+            color: var(--accent);
+            font-weight: 500;
+            margin-bottom: 16px;
+            padding-left: 46px;
+        }
+
+        .product-card ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 9px;
+        }
+
+        .product-card li {
+            display: flex;
+            align-items: flex-start;
+            gap: 9px;
+            font-size: 13px;
+            color: var(--muted);
+            line-height: 1.5;
+        }
+
+        .product-card li::before {
+            content: '';
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--accent);
+            margin-top: 8px;
+            flex-shrink: 0;
+        }
+
+        .join-card {
+            text-align: center;
+            background: linear-gradient(180deg, var(--surface) 0%, rgba(78, 154, 245, 0.06) 100%);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 44px 28px;
+            margin-bottom: 60px;
+            transition: all 0.4s var(--ease-out);
+        }
+
+        .join-card:hover {
+            border-color: var(--accent);
+            box-shadow: 0 16px 40px rgba(78, 154, 245, 0.12);
+        }
+
+        .join-card h2 {
+            font-size: 26px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 10px;
+            letter-spacing: -0.5px;
+        }
+
+        .join-card p {
+            font-size: 14px;
+            color: var(--muted);
+            margin-bottom: 24px;
+        }
+
+        @media (max-width: 640px) {
+            .hero h1 { font-size: 30px; }
+            .stats, .features, .product-grid { grid-template-columns: 1fr; }
+            .btn-row { flex-direction: column; align-items: center; }
+            .dropdown-menu { left: 0; transform: translateY(-8px); width: 100%; }
+            .dropdown-wrap.open .dropdown-menu { transform: translateY(0); }
+            .info-panel { right: -50px; width: 280px; }
+        }
+
         .irow {
             display: flex;
             justify-content: space-between;
@@ -497,15 +676,6 @@
             color: var(--muted);
             animation: fadeInUp 0.8s var(--ease-out) 1s both;
         }
-
-        @media (max-width: 640px) {
-            .hero h1 { font-size: 30px; }
-            .stats, .features { grid-template-columns: 1fr; }
-            .btn-row { flex-direction: column; align-items: center; }
-            .dropdown-menu { left: 0; transform: translateY(-8px); width: 100%; }
-            .dropdown-wrap.open .dropdown-menu { transform: translateY(0); }
-            .info-panel { right: -50px; }
-        }
     </style>
 </head>
 <body>
@@ -517,19 +687,20 @@
             Venus
         </a>
         <div class="nav-links">
-            <a href="../docs" class="nav-link">API Docs</a>
             <a href="https://getvenus.kdns.fr/tos" class="nav-link">Terms</a>
-            <a href="#" class="nav-link" id="discord-link">Discord</a>
+            <a href="https://discord.gg/xmVuuRhWQP" target="_blank" rel="noopener" class="nav-link" id="discord-link">Discord</a>
             <div class="info-wrap">
                 <a href="#" class="nav-link" id="infoBtn">Status</a>
                 <div class="info-panel" id="infoPanel">
-                    <h4>Build Info</h4>
+                    <div class="tab-row">
+                        <button class="tab-btn active" data-build="Internal">Executor</button>
+                        <button class="tab-btn" data-build="External">External</button>
+                    </div>
+                    <div class="irow status-row">
+                        <span>Status</span><span id="ep-status">--</span>
+                    </div>
                     <div class="irow"><span>Version</span><span id="ep-version">--</span></div>
-                    <div class="irow"><span>UNC</span><span id="ep-unc">--%</span></div>
-                    <div class="irow"><span>sUNC</span><span id="ep-sunc">--%</span></div>
-                    <div class="irow"><span>RakNet</span><span id="ep-raknet">--</span></div>
-                    <div class="irow"><span>Multi Instance</span><span id="ep-multi">--</span></div>
-                    <div class="irow"><span>Decompiler</span><span id="ep-decomp">--</span></div>
+                    <div class="irow"><span>Supported Build</span><span id="ep-build">--</span></div>
                     <div class="ichanges">
                         <h4>Changelog</h4>
                         <div id="ep-changelog"></div>
@@ -543,7 +714,7 @@
 <div class="wrap">
     <section class="hero">
         <h1>Venus</h1>
-        <p>A powerful external for Roblox with many Features.</p>
+        <p>Best Executor And External &mdash; simple UI, huge feature set, updated within 24 hours.</p>
         <div class="badge">
             <span class="badge-dot" id="main-status-dot"></span>
             <span id="main-status-text">Loading...</span>
@@ -563,7 +734,7 @@
     <div class="stats">
         <div class="stat">
             <div class="stat-num" id="member-count">--</div>
-            <div class="stat-lbl">Active Users</div>
+            <div class="stat-lbl">Online Now</div>
         </div>
         <div class="stat">
             <div class="stat-num">99.9%</div>
@@ -575,19 +746,46 @@
         </div>
     </div>
 
-    <div class="features">
-        <div class="feat">
-            <h3>Fast Updates</h3>
-            <p>Quick Update times.</p>
+    <h2 class="sections-title">Why our Executor?</h2>
+    <div class="product-grid">
+        <div class="product-card">
+            <div class="pc-head">
+                <div class="pc-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                </div>
+                <h3>Executor</h3>
+            </div>
+            <div class="pc-sub">Internal script execution</div>
+            <ul>
+                <li>Simple UI</li>
+                <li>99 UNC, 94 sUNC, Many More..</li>
+                <li>Updates within 24 hours</li>
+                <li>Run's on older/newer pc's</li>
+            </ul>
         </div>
-        <div class="feat">
-            <h3>External Build</h3>
-            <p>Prioritizes stability.</p>
+        <div class="product-card">
+            <div class="pc-head">
+                <div class="pc-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                </div>
+                <h3>External</h3>
+            </div>
+            <div class="pc-sub">Undetected external tools</div>
+            <ul>
+                <li>Clean/Simple UI</li>
+                <li>100+ Features</li>
+                <li>100% Safe</li>
+            </ul>
         </div>
-        <div class="feat">
-            <h3>Experienced Dev</h3>
-            <p>Built by a developer with a history of successful projects.</p>
-        </div>
+    </div>
+
+    <div class="join-card">
+        <h2>Join Venus</h2>
+        <p>Grab the latest build, get support and release pings.</p>
+        <a href="https://discord.gg/xmVuuRhWQP" target="_blank" rel="noopener" class="btn btn-fill" id="join-btn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.79 19.79 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128c.126-.094.252-.192.372-.291a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
+            Join Venus today
+        </a>
     </div>
 </div>
 
@@ -595,6 +793,7 @@
     <div class="wrap">Venus 2026 V1 &middot; All rights reserved</div>
 </footer>
 
+<script src="../API/fetch.js"></script>
 <script>
     function fmt(n) {
         if (n >= 1e6) return (n / 1e6).toFixed(1).replace(/\.0$/, '') + 'M';
@@ -602,128 +801,135 @@
         return String(n);
     }
 
-    function animateValue(element, start, end, duration) {
+    function animateValue(element, start, end, duration, suffix) {
+        const add = suffix === false ? '' : '+';
         let startTimestamp = null;
         const step = (timestamp) => {
             if (!startTimestamp) startTimestamp = timestamp;
             const progress = Math.min((timestamp - startTimestamp) / duration, 1);
             const easeProgress = 1 - Math.pow(1 - progress, 3);
             const current = Math.floor(easeProgress * (end - start) + start);
-            element.textContent = fmt(current) + '+';
-            if (progress < 1) {
-                window.requestAnimationFrame(step);
-            }
+            element.textContent = fmt(current) + add;
+            if (progress < 1) window.requestAnimationFrame(step);
         };
         window.requestAnimationFrame(step);
     }
 
-    async function loadMembers() {
-        try {
-            const r = await fetch('https://discord.com/api/guilds/1538645400402264205/widget.json');
-            if (!r.ok) throw 0;
-            const d = await r.json();
-            const memberCount = d.members ? d.members.length : 1000;
-            const countElement = document.getElementById('member-count');
-            animateValue(countElement, 0, memberCount, 1500);
-        } catch {
-            document.getElementById('member-count').textContent = '1K+';
-        }
+    // Which build the Status panel is showing
+    let activeBuild = 'Internal';
+    // Cached payloads so switching tabs is instant
+    const cache = { Internal: null, External: null };
+
+    const $ = (id) => document.getElementById(id);
+
+    function statusColor(online, label) {
+        if (label === 'Unknown') return '#5c6478';
+        return online ? '#34d399' : '#f87171';
     }
 
-    async function loadEndpoint() {
-        try {
-            const r = await fetch('https://getvenus.kdns.fr/API/endpoint.json');
-            if (!r.ok) throw 0;
-            const d = await r.json();
-            const v = d["Venus"];
-            if (!v) throw 0;
+    // Render the currently selected build into the Status panel + hero badge
+    function render() {
+        const data = cache[activeBuild];
+        const st = VenusAPI.getStatus(data);
+        const color = statusColor(st.online, st.label);
 
-            document.getElementById('main-status-text').textContent = v.Status;
-            document.getElementById('status-label').textContent = v.Status;
-            document.getElementById('ep-version').textContent = v.Version;
-            document.getElementById('ep-unc').textContent = v.UNC + '%';
-            document.getElementById('ep-sunc').textContent = v.sUNC + '%';
-            document.getElementById('ep-raknet').textContent = v.Raknet ? 'Yes' : 'No';
-            document.getElementById('ep-multi').textContent = v.Multi_Instance ? 'Yes' : 'No';
-            document.getElementById('ep-decomp').textContent = v.Decompiler ? 'Yes' : 'No';
+        $('ep-status').innerHTML = '<span class="mini-dot" style="background:' + color + '"></span>' + st.label;
+        $('ep-version').textContent = (data && data.version) || '--';
+        $('ep-build').textContent = VenusAPI.getSupportedBuild(data) || '--';
 
-            if (v.Discord_Invite) {
-                document.getElementById('discord-link').href = v.Discord_Invite;
-            }
+        $('main-status-text').textContent = st.label;
+        $('main-status-dot').style.background = color;
+        $('status-label').textContent = st.label;
+        $('status-label').style.color = color;
 
-            const menu = document.getElementById('download-menu');
-            menu.innerHTML = '';
-            
-            if (v.Download_Options && typeof v.Download_Options === 'object') {
-                Object.entries(v.Download_Options).forEach(([key, opt], index) => {
-                    const a = document.createElement('a');
-                    a.href = opt.Download_Link;
-                    a.className = 'dropdown-item';
-                    a.target = '_blank';
-                    a.style.animationDelay = `${index * 0.05}s`;
-                    a.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg><span>${opt.Title}</span>`;
-                    menu.appendChild(a);
-                });
-            }
-
-            const cl = document.getElementById('ep-changelog');
-            cl.innerHTML = '';
-            if (Array.isArray(v.Changelogs) && v.Changelogs.length) {
-                v.Changelogs.forEach((c, index) => {
-                    const div = document.createElement('div');
-                    div.className = 'ichange';
-                    div.style.animationDelay = `${index * 0.1}s`;
-                    div.textContent = c;
-                    cl.appendChild(div);
-                });
-            } else {
+        const cl = $('ep-changelog');
+        cl.innerHTML = '';
+        const logs = VenusAPI.getChangelogs(data);
+        if (logs.length) {
+            logs.forEach((c, i) => {
                 const div = document.createElement('div');
                 div.className = 'ichange';
-                div.textContent = 'No changes yet';
+                div.style.animationDelay = (i * 0.1) + 's';
+                div.textContent = c;
                 cl.appendChild(div);
-            }
-
-            let dc = '#5c6478';
-            if (v.Status === 'Operational') dc = '#34d399';
-            else if (v.Status === 'Down') dc = '#f87171';
-            else if (v.Status === 'Maintenance') dc = '#fbbf24';
-            else if (v.Status === 'Testing') dc = '#a78bfa';
-            else if (v.Status === 'Updating') dc = '#60a5fa';
-            else if (v.Status === 'In Dev') dc = '#fb923c';
-
-            document.getElementById('main-status-dot').style.background = dc;
-        } catch {
-            document.getElementById('main-status-text').textContent = 'Unknown';
+            });
+        } else {
+            const div = document.createElement('div');
+            div.className = 'ichange';
+            div.textContent = 'No changes yet';
+            cl.appendChild(div);
         }
     }
 
-    document.getElementById('infoBtn').addEventListener('click', e => {
-        e.preventDefault();
-        document.getElementById('infoPanel').classList.toggle('open');
+    async function loadBuilds() {
+        const all = await VenusAPI.fetchAll();
+        cache.Internal = all.Internal;
+        cache.External = all.External;
+        render();
+    }
+
+    async function loadMembers() {
+        const memberCount = await VenusAPI.fetchMembers();
+        if (memberCount) {
+            // Set the real value immediately so a throttled/rAF-less tab
+            // still shows the count, then animate up to it.
+            $('member-count').textContent = fmt(memberCount);
+            animateValue($('member-count'), 0, memberCount, 1500, false);
+        } else {
+            $('member-count').textContent = '--';
+        }
+    }
+
+    // Status panel tab switcher (Internal = Executor, External)
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            activeBuild = btn.dataset.build;
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            render();
+        });
     });
 
-    document.getElementById('download-btn').addEventListener('click', e => {
+    $('infoBtn').addEventListener('click', e => {
         e.preventDefault();
-        document.getElementById('download-wrap').classList.toggle('open');
+        $('infoPanel').classList.toggle('open');
+    });
+
+    $('download-btn').addEventListener('click', e => {
+        e.preventDefault();
+        $('download-wrap').classList.toggle('open');
     });
 
     document.addEventListener('click', e => {
         const infoWrap = document.querySelector('.info-wrap');
-        if (!infoWrap.contains(e.target)) {
-            document.getElementById('infoPanel').classList.remove('open');
-        }
-        
-        const downloadWrap = document.getElementById('download-wrap');
-        if (!downloadWrap.contains(e.target)) {
-            downloadWrap.classList.remove('open');
-        }
+        if (!infoWrap.contains(e.target)) $('infoPanel').classList.remove('open');
+
+        const downloadWrap = $('download-wrap');
+        if (!downloadWrap.contains(e.target)) downloadWrap.classList.remove('open');
     });
 
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
+    // Build the Download dropdown: one entry per product
+    (function buildDownloadMenu() {
+        const menu = $('download-menu');
+        const invite = VenusAPI.DEFAULT_INVITE;
+        [['Executor', 'M16 18l6-6-6-6M8 6l-6 6 6 6'],
+         ['External', 'M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zM2 12h20M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20z']]
+            .forEach(([title, path]) => {
+                const a = document.createElement('a');
+                a.href = invite;
+                a.target = '_blank';
+                a.rel = 'noopener';
+                a.className = 'dropdown-item';
+                a.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="' + path + '"></path></svg><span>' + title + '</span>';
+                menu.appendChild(a);
+            });
+    })();
 
+    // Keep the Discord buttons in sync with the API invite if it ever changes
+    const inviteLink = $('discord-link');
+    if (inviteLink) inviteLink.href = VenusAPI.DEFAULT_INVITE;
+
+    const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -733,14 +939,14 @@
         });
     }, observerOptions);
 
-    document.querySelectorAll('.feat, .stat').forEach(el => {
+    document.querySelectorAll('.product-card, .join-card, .stat').forEach(el => {
         el.style.animationPlayState = 'paused';
         observer.observe(el);
     });
 
     loadMembers();
-    loadEndpoint();
-    setInterval(loadEndpoint, 30000);
+    loadBuilds();
+    setInterval(loadBuilds, 30000);
 </script>
 
 </body>

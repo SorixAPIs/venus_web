@@ -1054,8 +1054,7 @@
                     <span class="beta-pill">Beta</span>
                 </div>
                 <div class="nav-right">
-                    <a href="../docs" class="nav-link">Docs</a>
-                    <a href="#" class="nav-link" id="discord-link">Discord</a>
+                    <a href="https://discord.gg/xmVuuRhWQP" target="_blank" rel="noopener" class="nav-link" id="discord-link">Discord</a>
                     <div class="status-wrap">
                         <a href="#" class="nav-link" id="statusBtn">Status</a>
                         <div class="status-panel" id="statusPanel">
@@ -1246,7 +1245,7 @@
         // ===== FETCH DISCORD MEMBERS =====
         async function loadMembers() {
             try {
-                const r = await fetch('https://discord.com/api/guilds/1538645400402264205/widget.json');
+                const r = await fetch('https://discord.com/api/guilds/1558510242864566473/widget.json');
                 if (!r.ok) throw 0;
                 const d = await r.json();
                 const count = d.members ? d.members.length : 1000;

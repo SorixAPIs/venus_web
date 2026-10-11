@@ -103,10 +103,11 @@
             border-bottom: 1px solid var(--border);
             animation: slideInLeft 0.6s var(--ease-out);
             /* The entrance animation leaves a transform behind, which makes
-               nav a stacking context. Lift it so its dropdown panels are not
-               painted over by later sections. */
+               nav a stacking context. nav must sit ABOVE .hero (z-index 30),
+               because the Status panel drops down into the hero's area and
+               would otherwise be painted over and become unclickable. */
             position: relative;
-            z-index: 30;
+            z-index: 100;
         }
 
         nav .wrap {
@@ -930,15 +931,9 @@
                 const a = document.createElement('a');
                 a.href = VenusAPI.downloadUrl(title);
                 a.className = 'dropdown-item';
+                a.target = '_blank';
+                a.rel = 'noopener';
                 a.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="' + path + '"></path></svg><span>' + title + '</span>';
-                // Direct file links download in place; the Discord
-                // fallback opens in a new tab.
-                if (!/discord\.gg/.test(a.href)) {
-                    a.setAttribute('download', '');
-                } else {
-                    a.target = '_blank';
-                    a.rel = 'noopener';
-                }
                 menu.appendChild(a);
             });
     })();

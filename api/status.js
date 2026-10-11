@@ -40,6 +40,29 @@ function fetchUpstream(url) {
     });
 }
 
+// Read a query value off the raw URL. Vercel's runtime does not always
+// populate req.query for plain Node functions, so parse it ourselves.
+function queryParam(req, name) {
+    // Prefer req.query when the platform did populate it.
+    if (req.query && req.query[name] !== undefined) {
+        const v = req.query[name];
+        return Array.isArray(v) ? v[0] : v;
+    }
+    if (!req.url) return undefined;
+    const qs = req.url.split('?')[1];
+    if (!qs) return undefined;
+    for (const pair of qs.split('&')) {
+        const eq = pair.indexOf('=');
+        const key = eq === -1 ? pair : pair.slice(0, eq);
+        if (key === name) {
+            const raw = eq === -1 ? '' : pair.slice(eq + 1);
+            try { return decodeURIComponent(raw.replace(/\+/g, ' ')); }
+            catch (e) { return raw; }
+        }
+    }
+    return undefined;
+}
+
 module.exports = async (req, res) => {
     // Only GET makes sense here.
     if (req.method !== 'GET') {
@@ -51,7 +74,7 @@ module.exports = async (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS');
 
-    const build = (req.query && req.query.build) || '';
+    const build = queryParam(req, 'build') || '';
 
     // Unknown build name -> return everything.
     if (build && !Object.prototype.hasOwnProperty.call(ENDPOINTS, build)) {

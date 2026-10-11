@@ -12,6 +12,20 @@
 
 const http = require('http');
 
+// Pull the trailing path segment, e.g. /api/download/external -> "external".
+// Vercel exposes this as req.query.slug, but that is not reliably populated
+// for plain Node functions, so parse the URL directly as well.
+function pathSlug(req) {
+    if (req.query && req.query.slug !== undefined) {
+        const v = req.query.slug;
+        const one = Array.isArray(v) ? v[0] : v;
+        if (one) return one;
+    }
+    const path = (req.url || '').split('?')[0].replace(/\/+$/, '');
+    const i = path.lastIndexOf('/');
+    return i === -1 ? '' : path.slice(i + 1);
+}
+
 const FILES = {
     external: {
         url: 'http://paloma.hidencloud.com:24617/cdn/Loader.exe',
@@ -25,8 +39,8 @@ module.exports = (req, res) => {
         return res.status(405).json({ error: 'method not allowed' });
     }
 
-    // /api/download/<key>  (Vercel gives us the tail via req.query.slug)
-    const key = Array.isArray(req.query.slug) ? req.query.slug[0] : req.query.slug;
+    // /api/download/<key>
+    const key = pathSlug(req);
     const file = FILES[key];
 
     if (!file) {
@@ -44,7 +58,11 @@ module.exports = (req, res) => {
         }
 
         res.setHeader('Content-Type', up.headers['content-type'] || 'application/octet-stream');
-        res.setHeader('Content-Length', up.headers['content-length'] || '');
+        // Only forward a real length; an empty value would be an invalid
+        // header and break the response.
+        if (up.headers['content-length']) {
+            res.setHeader('Content-Length', up.headers['content-length']);
+        }
         res.setHeader('Content-Disposition', `attachment; filename="${file.name}"`);
         // Executable: stop the browser or any intermediary caching it.
         res.setHeader('Cache-Control', 'no-store');
